@@ -4,6 +4,10 @@ const dataRoutes = require('./routes/dataRoutes');
 const connectDB = require('./config/db');
 const profileRoutes = require('./routes/profileRoutes');
 const authRoutes = require('./routes/authRoutes');
+const cors = require('cors');
+
+// Enable CORS
+app.use(cors());
 // Connect to the database
 connectDB();
 
