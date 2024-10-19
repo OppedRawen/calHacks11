@@ -38,5 +38,5 @@ skills:[{type:mongoose.Schema.Types.ObjectId, ref:'Skill'}]
 //   next();
 // });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema, 'calhack');
 

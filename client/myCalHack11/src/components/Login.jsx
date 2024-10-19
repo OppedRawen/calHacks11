@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { login } from '../services/authServices'
+import { login } from '../services/authServices';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -14,7 +14,10 @@ function Login() {
     e.preventDefault();
     try {
       await login(formData);
-      navigate('/dashboard');
+      console.log('Login successful!');
+      // Set the isLoggedIn flag in localStorage after a successful login
+      localStorage.setItem('isLoggedIn', true);
+      navigate('/dashboard');  // Redirect after successful login
     } catch (error) {
       console.error('Error during login:', error.response?.data || error.message);
     }

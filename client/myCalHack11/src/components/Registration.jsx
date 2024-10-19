@@ -14,7 +14,10 @@ function Register() {
     e.preventDefault();
     try {
       await register(formData);
-      navigate('/dashboard');
+      // Set the isLoggedIn flag in localStorage after successful registration
+      localStorage.setItem('isLoggedIn', true);
+      // Redirect to the profile questionnaire after registration
+      navigate('/profile-questionnaire');
     } catch (error) {
       console.error('Error during registration:', error.response?.data || error.message);
     }
