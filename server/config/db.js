@@ -1,18 +1,19 @@
 const mysql = require('mysql2/promise');
 // require('dotenv').config({ path: '.env' });
 const fs = require('fs');
+require('dotenv').config();
 
 const connectDB = async () => {
   try {
     const connection = await mysql.createConnection({
-      host: 'svc-3482219c-a389-4079-b18b-d50662524e8a-shared-dml.aws-virginia-6.svc.singlestore.com',
-      port: 3333,
-      user: 'david-2e12e',
-      password: 'Heheda3120@',
-      database: 'db_david_5328b',
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       ssl: {
-        ca: fs.readFileSync('./test/singlestore_bundle.pem'),
-    }
+        ca: fs.readFileSync(process.env.SSL_CERT_PATH),
+      }
     });
 
     await connection.query(`
