@@ -3,6 +3,7 @@ const app = express();
 const dataRoutes = require('./routes/dataRoutes');
 const connectDB = require('./config/db');
 const profileRoutes = require('./routes/profileRoutes');
+const authRoutes = require('./routes/authRoutes');
 // Connect to the database
 connectDB();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 // Use the data routes for API requests
 app.use('/api/data', dataRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/auth', authRoutes);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

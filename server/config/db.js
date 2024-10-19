@@ -28,13 +28,17 @@ const connectDB = async () => {
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
-await connection.query(`CREATE TABLE IF NOT EXISTS Users (
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS Users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
+  email VARCHAR(255) NOT NULL,  -- No unique constraint
   password VARCHAR(255) NOT NULL,
   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)`);
+);
+    `);
+    
+    
     
     console.log('Connected to SingleStore');
     return connection;
