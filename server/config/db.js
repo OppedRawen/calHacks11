@@ -1,14 +1,53 @@
-const mongoose = require('mongoose');
-require('dotenv').config({ path: '.env' });
-console.log(process.env.MONGO_URI);
+
+const mysql = require('mysql2/promise');
+// require('dotenv').config({ path: '.env' });
+const fs = require('fs');
+require('dotenv').config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('MongoDB connected');
+    const connection = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      ssl: {
+        ca: fs.readFileSync(process.env.SSL_CERT_PATH),
+      }
+    });
+
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS UserProfile (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        desiredJobTitle VARCHAR(255),
+        jobType ENUM('Full-Time', 'Part-Time', 'Freelance'),
+        preferredIndustry JSON,
+        experienceYears INT,
+        programmingLanguages JSON,
+        frameworks JSON,
+        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS Users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,  -- No unique constraint
+  password VARCHAR(255) NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+    `);
+    
+    
+    
+    console.log('Connected to SingleStore');
+    return connection;
   } catch (err) {
-    console.error(err.message);
-    process.exit(1); // Exit process with failure
+    console.error('Error connecting to SingleStore:', err);
+    process.exit(1);  // Exit process with failure
+
   }
 };
 
