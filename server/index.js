@@ -5,6 +5,7 @@ const dataRoutes = require('./routes/dataRoutes');
 const connectDB = require('./config/db');
 const profileRoutes = require('./routes/profileRoutes');
 const authRoutes = require('./routes/authRoutes');
+const experienceRoutes = require('./Routes/experienceRoutes');
 const cors = require('cors');
 
 // Enable CORS
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use('/api/data', dataRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/experience', experienceRoutes);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
