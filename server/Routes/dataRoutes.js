@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { createData, getData, deleteData } = require('../controllers/dataController');
 
-// POST route to create data
+// POST route to insert data
 router.post('/', createData);
 
 // GET route to fetch all data
