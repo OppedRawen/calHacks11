@@ -17,9 +17,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  desiredJobRole:{
-    type:String
-  },
+ 
   resumeUrl:{
     type:String,
   },
@@ -41,3 +39,4 @@ skills:[{type:mongoose.Schema.Types.ObjectId, ref:'Skill'}]
 // });
 
 module.exports = mongoose.model('User', userSchema);
+
