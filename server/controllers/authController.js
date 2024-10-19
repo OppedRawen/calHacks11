@@ -1,10 +1,12 @@
 const bcrypt = require('bcryptjs');
 const connectDB = require('../config/db');
 
+
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+
     const connection = await connectDB();
 
     // Check if user already exists
@@ -57,3 +59,4 @@ exports.loginUser = async (req, res) => {
     }
   };
   
+

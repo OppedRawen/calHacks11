@@ -1,3 +1,4 @@
+
 const mysql = require('mysql2/promise');
 // require('dotenv').config({ path: '.env' });
 const fs = require('fs');
@@ -46,6 +47,7 @@ const connectDB = async () => {
   } catch (err) {
     console.error('Error connecting to SingleStore:', err);
     process.exit(1);  // Exit process with failure
+
   }
 };
 

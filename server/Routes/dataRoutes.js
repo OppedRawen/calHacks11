@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const { createData, getData, deleteData } = require('../controllers/dataController');
 
@@ -10,5 +11,6 @@ router.get('/', getData);
 
 // DELETE route to remove data by ID
 router.delete('/:id', deleteData);
+
 
 module.exports = router;
