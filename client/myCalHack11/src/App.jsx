@@ -1,5 +1,9 @@
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+// import VoiceAgent from './components/VoiceAgent';
+import StartVoiceButton from './components/StartVoiceButton';
+import { VoiceProvider } from '@humeai/voice-react';
+
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
@@ -7,6 +11,9 @@ import Home from './components/Home';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const configId = import.meta.env.VITE_CONFIG_ID;
+  
 
   // Check if user is logged in by checking localStorage
   useEffect(() => {
@@ -24,10 +31,16 @@ function App() {
   };
 
   return (
+    
+    <VoiceProvider  auth={{ type: 'apiKey', value: apiKey }}
+
+    configId={configId}>
     <div className="min-h-screen bg-gray-100">
       <header className="bg-blue-600 p-4">
         <div className="container mx-auto flex justify-between">
-          <h1 className="text-white text-xl">Job Portal</h1>
+          <h1 clas sName="text-white text-xl">Job Portal</h1>
+          <StartVoiceButton />
+          
           <nav>
             {isLoggedIn ? (
               <button
@@ -58,6 +71,7 @@ function App() {
         </Routes>
       </main>
     </div>
+    </VoiceProvider>
   );
 }
 
