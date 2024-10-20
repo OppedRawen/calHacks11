@@ -7,6 +7,7 @@ import { VoiceProvider } from '@humeai/voice-react';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import DataExtraction from './components/DataExtraction';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -64,7 +65,7 @@ console.log(configId);
         </div>
       </header>
 
-      <main className="container mx-auto p-4">
+      <main className="min-h-screen bg-gradient-to-r from-gray-100 to-blue-50 py-12 px-4 sm:px-6 lg:px-8 container mx-auto p-4">
         <Routes>
           <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
@@ -72,15 +73,24 @@ console.log(configId);
             path="/"
             element={
               isLoggedIn ? (
-               
+                <>
                 <StartVoiceButton />
-             
+                <div className="flex justify-center mt-8">
+                  <button
+                    onClick={() => navigate('/data-extraction')}
+                    className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition"
+                  >
+                    Upload A Resume Or Type Your Information
+                  </button>
+                </div>
+                </>
               ) : (
                 <p>Please log in to access the voice agent.</p>
               )
             }
           />
           <Route path="/" element={<Home />} />
+          <Route path="/data-extraction" element={<DataExtraction />} />
         </Routes>
       </main>
     </div>
