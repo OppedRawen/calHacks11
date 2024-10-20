@@ -1,3 +1,4 @@
+const connectDB = require('../config/db');
 exports.uploadResume = async (req, res) => {
   try {
     console.log('Entering uploadResume function');
