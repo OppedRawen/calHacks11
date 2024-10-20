@@ -14,7 +14,8 @@ function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
   const configId = import.meta.env.VITE_CONFIG_ID;
   
-
+console.log(apiKey);
+console.log(configId);
   // Check if user is logged in by checking localStorage
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn');
@@ -36,16 +37,16 @@ function App() {
 
     configId={configId}>
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-600 p-4">
+      <header className="bg-slate-800 p-4">
         <div className="container mx-auto flex justify-between">
-          <h1 clas sName="text-white text-xl">Job Portal</h1>
-          <StartVoiceButton />
+          <h1 className=" text-white text-xl">Job Portal</h1>
+         
           
           <nav>
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
-                className="text-white bg-red-500 px-4 py-2 rounded hover:bg-red-600"
+                className="text-white bg-red-300 px-4 py-2 rounded hover:bg-red-600"
               >
                 Logout
               </button>
@@ -67,6 +68,18 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? (
+               
+                <StartVoiceButton />
+             
+              ) : (
+                <p>Please log in to access the voice agent.</p>
+              )
+            }
+          />
           <Route path="/" element={<Home />} />
         </Routes>
       </main>
