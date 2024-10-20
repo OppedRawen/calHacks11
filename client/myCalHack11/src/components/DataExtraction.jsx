@@ -1,5 +1,6 @@
-import React from 'react';
-import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, MessageSquare } from 'lucide-react';
+import React, { useState } from 'react';
+import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, MessageSquare, Upload } from 'lucide-react';
+import { Button } from './button';
 
 const ExperienceType = ({ icon: Icon, title, description }) => (
   <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200">
@@ -12,6 +13,8 @@ const ExperienceType = ({ icon: Icon, title, description }) => (
 );
 
 const DataExtraction = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const experienceTypes = [
     { icon: PlusCircle, title: "Technical Achievement", description: "Bug fixes, optimizations, new features, or technical solutions" },
     { icon: Users, title: "Collaboration", description: "Team projects, cross-functional work, communication wins" },
@@ -24,10 +27,52 @@ const DataExtraction = () => {
     { icon: MessageSquare, title: "Conflict Resolution", description: "Handling disagreements, difficult situations, negotiations" }
   ];
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
+  const handleUpload = () => {
+    if (selectedFile) {
+      // Here you would typically send the file to your server
+      console.log('Uploading file:', selectedFile.name);
+      // Reset the selected file after upload
+      setSelectedFile(null);
+    } else {
+      console.log('No file selected');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-100 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">Record Your Professional Experiences</h1>
+        
+        <div className="mb-8 flex flex-col items-center">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Upload Your Resume</h2>
+          <div className="flex items-center space-x-4">
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="hidden"
+              id="resume-upload"
+              accept=".pdf,.doc,.docx"
+            />
+            <label htmlFor="resume-upload" className="cursor-pointer">
+              <Button variant="outline" className="flex items-center space-x-2">
+                <Upload className="w-5 h-5" />
+                <span>Choose File</span>
+              </Button>
+            </label>
+            <Button onClick={handleUpload} disabled={!selectedFile}>
+              Upload Resume
+            </Button>
+          </div>
+          {selectedFile && (
+            <p className="mt-2 text-sm text-gray-600">Selected file: {selectedFile.name}</p>
+          )}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {experienceTypes.map((type, index) => (
             <ExperienceType key={index} {...type} />
