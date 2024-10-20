@@ -80,7 +80,7 @@ console.log(configId);
                     onClick={() => navigate('/data-extraction')}
                     className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition"
                   >
-                    Go to Data Extraction Page
+                    Upload A Resume Or Type Your Information
                   </button>
                 </div>
                 </>
