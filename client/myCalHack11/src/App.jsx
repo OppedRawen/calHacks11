@@ -7,6 +7,7 @@ import { VoiceProvider } from '@humeai/voice-react';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import DataExtractionFrontend from './components/DataExtractionFrontend';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
