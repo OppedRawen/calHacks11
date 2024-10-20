@@ -55,6 +55,17 @@ const connectDB = async () => {
         RolesAndResponsibilities TEXT
       );
     `);
+    await connection.query(`
+    CREATE TABLE IF NOT EXISTS Transcripts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_Id INT,  
+  transcript TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+    `);
+
+
     
     console.log('Connected to SingleStore');
     return connection;
