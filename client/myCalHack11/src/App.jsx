@@ -65,7 +65,7 @@ console.log(configId);
         </div>
       </header>
 
-      <main className="container mx-auto p-4">
+      <main className="min-h-screen bg-gradient-to-r from-gray-100 to-blue-50 py-12 px-4 sm:px-6 lg:px-8 container mx-auto p-4">
         <Routes>
           <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />

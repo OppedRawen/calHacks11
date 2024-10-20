@@ -1,12 +1,11 @@
 import React from 'react';
-import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, Lightbulb, MessageSquare } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, MessageSquare } from 'lucide-react';
 
 const ExperienceType = ({ icon: Icon, title, description }) => (
-  <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-    <Icon className="w-8 h-8 text-blue-500" />
+  <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200">
+    <Icon className="w-10 h-10 text-blue-500" />
     <div>
-      <h3 className="font-semibold text-lg text-gray-800">{title}</h3>
+      <h3 className="font-semibold text-xl text-gray-800">{title}</h3>
       <p className="text-sm text-gray-600">{description}</p>
     </div>
   </div>
@@ -26,10 +25,10 @@ const DataExtraction = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Record Your Professional Experiences</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="min-h-screen bg-gradient-to-r from-gray-100 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">Record Your Professional Experiences</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {experienceTypes.map((type, index) => (
             <ExperienceType key={index} {...type} />
           ))}
