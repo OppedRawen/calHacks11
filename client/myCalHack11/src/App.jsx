@@ -7,7 +7,7 @@ import { VoiceProvider } from '@humeai/voice-react';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
-import DataExtractionFrontend from './components/DataExtractionFrontend';
+import DataExtraction from './components/DataExtraction';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -90,7 +90,7 @@ console.log(configId);
             }
           />
           <Route path="/" element={<Home />} />
-          <Route path="/data-extraction" element={<DataExtractionFrontend />} />
+          <Route path="/data-extraction" element={<DataExtraction />} />
         </Routes>
       </main>
     </div>

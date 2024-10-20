@@ -12,7 +12,7 @@ const ExperienceType = ({ icon: Icon, title, description }) => (
   </div>
 );
 
-const DataExtractionFrontend = () => {
+const DataExtraction = () => {
   const experienceTypes = [
     { icon: PlusCircle, title: "Technical Achievement", description: "Bug fixes, optimizations, new features, or technical solutions" },
     { icon: Users, title: "Collaboration", description: "Team projects, cross-functional work, communication wins" },
@@ -39,4 +39,4 @@ const DataExtractionFrontend = () => {
   );
 };
 
-export default DataExtractionFrontend;
+export default DataExtraction;
