@@ -1,5 +1,6 @@
 import React from 'react';
 import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, Lightbulb, MessageSquare } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ExperienceType = ({ icon: Icon, title, description }) => (
   <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">

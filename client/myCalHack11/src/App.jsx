@@ -73,15 +73,24 @@ console.log(configId);
             path="/"
             element={
               isLoggedIn ? (
-               
+                <>
                 <StartVoiceButton />
-             
+                <div className="flex justify-center mt-8">
+                  <button
+                    onClick={() => navigate('/data-extraction')}
+                    className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition"
+                  >
+                    Go to Data Extraction Page
+                  </button>
+                </div>
+                </>
               ) : (
                 <p>Please log in to access the voice agent.</p>
               )
             }
           />
           <Route path="/" element={<Home />} />
+          <Route path="/data-extraction" element={<DataExtractionFrontend />} />
         </Routes>
       </main>
     </div>
