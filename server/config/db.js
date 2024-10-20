@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const connectDB = async () => {
   try {
+    console.log('Attempting to connect to database...');
     const connection = await mysql.createConnection({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
@@ -27,7 +28,8 @@ const connectDB = async () => {
         experienceYears INT,
         programmingLanguages JSON,
         frameworks JSON,
-        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        resume JSON
       );
     `);
     await connection.query(`
@@ -64,6 +66,17 @@ const connectDB = async () => {
 );
 
     `);
+
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS Resumes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    filename VARCHAR(255) NOT NULL,
+  path VARCHAR(255) NOT NULL,
+  mimetype VARCHAR(100) NOT NULL,
+  size INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
+  );  
+      `);
 
 
     
