@@ -42,19 +42,31 @@ const connectDB = async () => {
     
     
     await connection.query(`
-      CREATE TABLE Experience (
-    ExperienceID INT PRIMARY KEY AUTO_INCREMENT,
-    UserID INT,  -- Foreign key reference to User table (but without constraint)
-    Organization VARCHAR(255),
-    ExperienceType VARCHAR(50),
-    Description TEXT,
-    StartDate DATE,
-    EndDate DATE,
-    Technologies TEXT,
-    EducationAndCertifications TEXT,
-    RolesAndResponsibilities TEXT
+      CREATE TABLE IF NOT EXISTS Experience (
+        ExperienceID INT PRIMARY KEY AUTO_INCREMENT,
+        UserID INT,
+        Organization VARCHAR(255),
+        ExperienceType VARCHAR(50),
+        Description TEXT,
+        StartDate DATE,
+        EndDate DATE,
+        Technologies TEXT,
+        EducationAndCertifications TEXT,
+        RolesAndResponsibilities TEXT
+      );
+    `);
+    await connection.query(`
+    CREATE TABLE IF NOT EXISTS Transcripts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_Id INT,  
+  transcript TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-`)
+
+    `);
+
+
+    
     console.log('Connected to SingleStore');
     return connection;
   } catch (err) {
