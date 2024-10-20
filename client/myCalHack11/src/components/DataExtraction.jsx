@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, MessageSquare, Upload, Star } from 'lucide-react';
-import { Button } from './button';
+import { Button } from './button'
+import  axios  from 'axios'
 
 const ExperienceType = ({ icon: Icon, title, description }) => (
   <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200">
@@ -38,8 +39,28 @@ const DataExtraction = () => {
 
   const handleUpload = () => {
     if (selectedFile) {
-      // Here you would typically send the file to your server
-      console.log('Uploading file:', selectedFile.name);
+      const formData = new FormData();
+      formData.append('resume', selectedFile);
+      formData.append('userId', '123'); // Replace with actual user ID
+
+      axios.post('http://localhost:3000/api/resume/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(response => {
+        const data = response.data;
+        if (data.message) {
+          console.log(data.message);
+          console.log("TESTTESTTEST");
+        } else {
+          console.log('Error:', data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Error uploading file:', error);
+      });
+  
       // Reset the selected file after upload
       setSelectedFile(null);
     } else {
@@ -65,7 +86,7 @@ const DataExtraction = () => {
               ref={fileInputRef}
               className="hidden"
               id="resume-upload"
-              accept=".pdf,.doc,.docx"
+              accept=".pdf,.doc,.docx,.md,.txt"
             />
             <Button variant="outline" className="flex items-center space-x-2" onClick={handleButtonClick}>
               <Upload className="w-5 h-5" />
