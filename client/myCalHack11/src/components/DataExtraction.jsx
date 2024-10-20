@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, MessageSquare, Upload } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { PlusCircle, Users, Briefcase, LightbulbOff, ClipboardList, UserPlus, GraduationCap, Zap, MessageSquare, Upload, Star } from 'lucide-react';
 import { Button } from './button';
 
 const ExperienceType = ({ icon: Icon, title, description }) => (
@@ -14,6 +14,7 @@ const ExperienceType = ({ icon: Icon, title, description }) => (
 
 const DataExtraction = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const experienceTypes = [
     { icon: PlusCircle, title: "Technical Achievement", description: "Bug fixes, optimizations, new features, or technical solutions" },
@@ -24,12 +25,15 @@ const DataExtraction = () => {
     { icon: UserPlus, title: "Leadership", description: "Team leading, mentoring, decision making" },
     { icon: GraduationCap, title: "Growth & Learning", description: "New skills, overcoming challenges, adaptability" },
     { icon: Zap, title: "Innovation", description: "New ideas, process improvements, creative solutions" },
-    { icon: MessageSquare, title: "Conflict Resolution", description: "Handling disagreements, difficult situations, negotiations" }
+    { icon: MessageSquare, title: "Conflict Resolution", description: "Handling disagreements, difficult situations, negotiations" },
+    { icon: Star, title: "General Reflections", description: "Any other reflections upon your successes that do not fit into another category" }
   ];
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setSelectedFile(file);
+    if (file) {
+      setSelectedFile(file);
+    }
   };
 
   const handleUpload = () => {
@@ -43,6 +47,10 @@ const DataExtraction = () => {
     }
   };
 
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-100 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
@@ -54,16 +62,15 @@ const DataExtraction = () => {
             <input
               type="file"
               onChange={handleFileChange}
+              ref={fileInputRef}
               className="hidden"
               id="resume-upload"
               accept=".pdf,.doc,.docx"
             />
-            <label htmlFor="resume-upload" className="cursor-pointer">
-              <Button variant="outline" className="flex items-center space-x-2">
-                <Upload className="w-5 h-5" />
-                <span>Choose File</span>
-              </Button>
-            </label>
+            <Button variant="outline" className="flex items-center space-x-2" onClick={handleButtonClick}>
+              <Upload className="w-5 h-5" />
+              <span>Choose File</span>
+            </Button>
             <Button onClick={handleUpload} disabled={!selectedFile}>
               Upload Resume
             </Button>
